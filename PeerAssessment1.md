@@ -16,6 +16,7 @@ data <- read.csv("activity.csv")
 
 In this section, we will analyze the variable number of steps taken per day, taken from an activity monitoring device. FIrstly, we compute the total number of steps taken per day and a histogram is plotted.
 
+
 ```r
 steps.per.day <- tapply(data$steps, data$date, sum, na.rm = T)
 histogram(steps.per.day, col = 1, xlab = "Number of steps taken per day", main = "Histogram of number of steps taken per day")
@@ -52,6 +53,7 @@ xyplot(steps.per.interval ~ intervals, type = "l", xlab = "Interval", col = 1,
 
 Moreover, the interval with the maximum number of steps will be computed.
 
+
 ```r
 max.steps.interval <- max(steps.per.interval)
 interval.max.steps <- names(steps.per.interval)[which.max(steps.per.interval)]
@@ -63,6 +65,7 @@ The interval with the maximum number of steps is 835 with a value of 206.1698.
 ## Missing values of number of steps
 
 First, the number of missing values of number of steps will be calculated.
+
 
 ```r
 number.nas <- sum(is.na(data$steps))
@@ -101,6 +104,7 @@ For new data with no missing values, the mean of number of steps taken per day i
 
 In order to analyze the differences in activity patterns between weekdays and weekend, it is necessary to obtain the day-number within week, to create a new variable which divides between them.
 
+
 ```r
 weekd <- as.POSIXlt(as.Date(data.mod$date))$wday
 data.mod$day <- ifelse(weekd %in% c(0, 1), "weekend", "weekday")
@@ -123,7 +127,7 @@ xyplot(steps ~ interval | day, data = df, type = "l", col = 1, layout = c(1,
 ![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9.png) 
 
 
-Observing the previous figure, we can observe that there is a peak higher in weekdays, which agrees with the more work activity of these days.
+Observing the previous figure, we can observe that the behaviour is similar in both graphs, although the peak of activity is higher in weekdays.
 
 
 
